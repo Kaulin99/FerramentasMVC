@@ -2,10 +2,9 @@
 using System.Data;
 using System.Data.SqlClient;
 
-
 namespace FerramentasMVC.DAO
 {
-    public class FerramentasDAO 
+    public class FerramentasDAO
     {
         private SqlParameter[] EnviaParametros(FerramentasViewModel f)
         {
@@ -27,6 +26,8 @@ namespace FerramentasMVC.DAO
             return f;
         }
 
+        /*----------------------------------------*/
+
         public List<FerramentasViewModel> CriaLista()
         {
             List<FerramentasViewModel> lista = new List<FerramentasViewModel>();
@@ -36,18 +37,66 @@ namespace FerramentasMVC.DAO
                 };
 
 
-            DataTable tabela = HelperDAO.ExecutaProcSelect("spListagem",parametro);
-            
+            DataTable tabela = HelperDAO.ExecutaProcSelect("spListagem", parametro);
+
             foreach (DataRow row in tabela.Rows)
             {
                 lista.Add(RecebeParametros(row));
             }
             return lista;
         }
-        
-        public void Inserir(FerramentasDAO f)
+
+        public FerramentasViewModel Consulta(int id)
         {
-            HelperDAO.ExecutaProc("",null);
+            SqlParameter[] parametros = new SqlParameter[]
+            {
+                new SqlParameter("Id",id),
+                new SqlParameter("Tabela","ferramentas")
+            };
+
+
+            DataTable tabela = HelperDAO.ExecutaProcSelect("spConsulta", parametros);
+
+            if (tabela.Rows.Count == 0)
+                return null;
+            else
+                return RecebeParametros(tabela.Rows[0]);
         }
+
+        public int IdAutomatico()
+        {
+            var parametros = new SqlParameter[]
+            {
+                new SqlParameter ("Tabela","ferramentas"),
+            };
+
+            DataTable tabela = HelperDAO.ExecutaProcSelect("spProximoId", parametros);
+            return Convert.ToInt32(tabela.Rows[0]["MAIOR"]);
+        }
+
+        /*----------------------------------------*/
+        
+        public void Inserir(FerramentasViewModel f)
+        {
+            HelperDAO.ExecutaProc("spInserir", EnviaParametros(f));
+        }
+
+        public void Editar(FerramentasViewModel f)
+        {
+            HelperDAO.ExecutaProc("spEditar", EnviaParametros(f));
+        }
+
+        public void Excluir(FerramentasViewModel f)
+        {
+            SqlParameter[] parametro = new SqlParameter[]
+            {
+                new SqlParameter ("Id",f.Id),
+                new SqlParameter("Tabela","ferramentas")
+            };
+
+            HelperDAO.ExecutaProc("spExcluir", parametro);
+        }
+
+        /*----------------------------------------*/
     }
 }
