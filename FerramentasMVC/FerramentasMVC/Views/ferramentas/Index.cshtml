@@ -1,0 +1,38 @@
+﻿@using FerramentasMVC.Models;
+@model List<FerramentasViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Listagem de ferramentas</h2>
+
+<a href="/Ferramentas/criar">Novo Registro</a>
+
+<table class="table table-responsive">
+    <tr>
+        <th>Ações</th>
+        <th>Cógido do produto</th>
+        <th>Nome da ferramenta</th>
+        <th>Código do fabricante</th>
+    </tr>
+    @foreach (var ferramenta in Model)
+    {
+        <tr>
+            <td>
+                <a href="/Ferramentas/Editar?id=@ferramenta.Id">Editar</a>
+                <a href="javascript:apagarFerramenta(@ferramenta.Id)">Apagar</a>
+            </td>
+            <td>@ferramenta.Id</td>
+            <td>@ferramenta.descricao</td>
+            <td>@ferramenta.FabricanteId</td>
+        </tr>
+    }
+</table>
+
+<script>
+    function apagarFerramenta(id)
+    {
+        if (confirm('Confirma a exclusão do registro? '))
+            location.href = 'Ferramentas/Deletar?id=' + id;
+    }
+</script>

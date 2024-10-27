@@ -24,7 +24,7 @@ namespace FerramentasMVC
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=ferramentas}/{action=Index}/{id?}");
 
             app.Run();
         }

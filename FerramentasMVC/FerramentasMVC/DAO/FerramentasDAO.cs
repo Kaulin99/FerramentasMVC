@@ -20,7 +20,7 @@ namespace FerramentasMVC.DAO
         {
             FerramentasViewModel f = new FerramentasViewModel();
             f.Id = Convert.ToInt32(recebe["Id"]);
-            f.descricao = Convert.ToString(recebe["Description"]);
+            f.descricao = Convert.ToString(recebe["descricao"]);
             f.FabricanteId = Convert.ToInt32(recebe["FabricanteId"]);
 
             return f;
@@ -33,7 +33,7 @@ namespace FerramentasMVC.DAO
             List<FerramentasViewModel> lista = new List<FerramentasViewModel>();
             SqlParameter[] parametro = new SqlParameter[]
                 {
-                    new SqlParameter("Tabela","ferramentas")
+                    new SqlParameter("tabela","ferramentas")
                 };
 
 
@@ -50,8 +50,8 @@ namespace FerramentasMVC.DAO
         {
             SqlParameter[] parametros = new SqlParameter[]
             {
-                new SqlParameter("Id",id),
-                new SqlParameter("Tabela","ferramentas")
+                new SqlParameter("id",id),
+                new SqlParameter("tabela","ferramentas")
             };
 
 
@@ -67,7 +67,7 @@ namespace FerramentasMVC.DAO
         {
             var parametros = new SqlParameter[]
             {
-                new SqlParameter ("Tabela","ferramentas"),
+                new SqlParameter ("tabela","ferramentas"),
             };
 
             DataTable tabela = HelperDAO.ExecutaProcSelect("spProximoId", parametros);
@@ -86,15 +86,15 @@ namespace FerramentasMVC.DAO
             HelperDAO.ExecutaProc("spEditar", EnviaParametros(f));
         }
 
-        public void Excluir(FerramentasViewModel f)
+        public void Excluir(int id)
         {
             SqlParameter[] parametro = new SqlParameter[]
             {
-                new SqlParameter ("Id",f.Id),
-                new SqlParameter("Tabela","ferramentas")
+                new SqlParameter ("id",id),
+                new SqlParameter("tabela","ferramentas")
             };
 
-            HelperDAO.ExecutaProc("spExcluir", parametro);
+            HelperDAO.ExecutaProc("spDeletar", parametro);
         }
 
         /*----------------------------------------*/

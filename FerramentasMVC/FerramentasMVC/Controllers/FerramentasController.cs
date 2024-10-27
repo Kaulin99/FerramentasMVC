@@ -87,6 +87,20 @@ namespace FerramentasMVC.Controllers
             }
         }
 
+        public IActionResult Deletar(int id)
+        {
+            try
+            {
+                FerramentasDAO dao = new FerramentasDAO();
+                dao.Excluir(id);
+                return View("Index");
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new ErrorViewModel(ex.ToString()));
+            }
+        }
+
         private void ValidaDados(FerramentasViewModel f, string Operecao)
         {
             ModelState.Clear(); //Evita aparecer erros que eu não tratei
