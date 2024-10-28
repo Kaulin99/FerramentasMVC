@@ -78,7 +78,13 @@ namespace FerramentasMVC.DAO
         
         public void Inserir(FerramentasViewModel f)
         {
-            HelperDAO.ExecutaProc("spInserir", EnviaParametros(f));
+            var parametros = new SqlParameter[]
+            {
+                new SqlParameter("descricao",f.descricao),
+                new SqlParameter("FabricanteId",f.FabricanteId)
+            };
+
+            HelperDAO.ExecutaProc("spInserir", parametros);
         }
 
         public void Editar(FerramentasViewModel f)

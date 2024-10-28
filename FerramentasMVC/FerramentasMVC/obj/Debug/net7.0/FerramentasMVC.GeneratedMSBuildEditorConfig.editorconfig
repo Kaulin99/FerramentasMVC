@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\kauea\source\repos\FerramentasMVC\FerramentasMVC\FerramentasMVC
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/kauea/source/repos/FerramentasMVC/FerramentasMVC/FerramentasMVC/Views/ferramentas/Form.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcZmVycmFtZW50YXNcRm9ybS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/kauea/source/repos/FerramentasMVC/FerramentasMVC/FerramentasMVC/Views/ferramentas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcZmVycmFtZW50YXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

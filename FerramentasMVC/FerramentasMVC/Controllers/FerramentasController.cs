@@ -43,9 +43,9 @@ namespace FerramentasMVC.Controllers
         {
             try
             {
-                ViewBag.Operecao = "E";
+                ViewBag.Operacao = "E";
 
-               FerramentasDAO dao = new FerramentasDAO();
+                FerramentasDAO dao = new FerramentasDAO();
                FerramentasViewModel f = dao.Consulta(id);
 
                if (f == null)
@@ -73,6 +73,7 @@ namespace FerramentasMVC.Controllers
                 else
                 {
                     FerramentasDAO dao = new FerramentasDAO();
+
                     if(Operacao == "C")
                         dao.Inserir(f);
                     else 
@@ -93,7 +94,7 @@ namespace FerramentasMVC.Controllers
             {
                 FerramentasDAO dao = new FerramentasDAO();
                 dao.Excluir(id);
-                return View("Index");
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
@@ -105,14 +106,6 @@ namespace FerramentasMVC.Controllers
         {
             ModelState.Clear(); //Evita aparecer erros que eu não tratei
             FerramentasDAO dao = new FerramentasDAO();
-
-            if (f.Id <= 0)
-                ModelState.AddModelError("Id", "ID inválido");
-            else 
-                if(Operecao == "C" && dao.Consulta(f.Id) != null)
-                    ModelState.AddModelError("Id", "Código já está em uso.");
-                if (Operecao == "E" && dao.Consulta(f.Id) == null)
-                    ModelState.AddModelError("Id", "Código não existe!");
 
             if (string.IsNullOrEmpty(f.descricao))
                 ModelState.AddModelError("descricao", "Preencha o nome da ferramenta");
